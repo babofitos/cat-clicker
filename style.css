@@ -1,0 +1,11 @@
+#adminview form label {
+  display:block;
+}
+#adminview form span {
+  float: left;
+  width: 100px;
+}
+
+#adminview form {
+  display:none;
+}
