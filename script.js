@@ -110,13 +110,6 @@ var octopus = {
   getCats: function() {
     return model.cats;
   },
-  getCat: function(name) {
-    for (var i=0;i<model.cats.length;i++) {
-      if (model.cats[i].name === name) {
-        return model.cats[i];
-      }
-    }
-  },
   setCurrentCat: function(cat) {
     model.currentCat = cat;
   },
