@@ -29,8 +29,8 @@ var buttonsView = {
         click: function() {
           //views can talk to views? idk
           octopus.setCurrentCat(cat);
-          adminView.hide();
           catsView.render();
+          adminView.render();
         } 
       });
       self.buttons.append(catbutton);
@@ -47,6 +47,7 @@ var catsView = {
     var self = this;
     this.catDisplay.on('click', '#catpic', function() {
       octopus.updateCounter();
+      adminView.render();
     });
     this.render();
   },
@@ -65,6 +66,7 @@ var adminView = {
     this.url = $('#url');
     this.numClicks = $('#numclicks');
     $('#adminbtn').on('click', function() {
+      adminView.show();
       adminView.render();
     });
     $('#cancel').on('click', function(e) {
@@ -77,7 +79,6 @@ var adminView = {
     });
   },
   render: function() {
-    this.show();
     var cat = octopus.getCurrentCat();
     this.name.val(cat.name);
     this.url.val(cat.src);
