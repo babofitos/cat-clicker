@@ -46,11 +46,7 @@ var catsView = {
     this.img = $('#catpic');
     var self = this;
     this.catDisplay.on('click', '#catpic', function() {
-      var cat = self.catName.text();
-      var count = octopus.getCat(cat).counter;
-      count++;
-      self.counter.html(count);
-      octopus.updateCounter(cat);
+      octopus.updateCounter();
     });
     this.render();
   },
@@ -127,21 +123,17 @@ var octopus = {
   getCurrentCat: function() {
     return model.currentCat;
   },
-  updateCounter: function(name) {
-    model.cats.forEach(function(cat) {
-      if (cat.name === name) {
-        cat.counter++;
-      }
-    });
+  updateCounter: function() {
+    this.getCurrentCat().counter++;
+    catsView.render();
   },
   updateCat: function(updated) {
-    var currentCat = this.getCurrentCat();
-    model.cats.forEach(function(cat, i) {
-      if (cat.name === currentCat.name) {
-        model.cats[i] = updated;
-        octopus.setCurrentCat(model.cats[i]);
+    var cat = this.getCurrentCat();
+    for (var prop in cat) {
+      if (cat.hasOwnProperty(prop)) {
+        cat[prop] = updated[prop];
       }
-    });
+    }
     buttonsView.render();
     catsView.render();
   }
